@@ -35,6 +35,11 @@ Model* handModel = nullptr;
 bool focusMode = false;
 bool spaceReleased = true;
 
+float watchOffsetRight = -0.21f;
+float watchOffsetUp = -0.01f;
+float watchSizeMult = 0.91f;
+const float focusQuadScale = 0.78f;
+
 static void ProcessInput(GLFWwindow* window)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -88,12 +93,15 @@ static void ProcessWatchPicking(int pickW, int pickH)
     float mx, my;
     glm::mat4 handM = ComputeHandModelMatrix(camera, true);
     glm::vec3 quadCenter = GetWatchPositionOnHand(handM, true);
+    quadCenter -= camera.GetRight() * 0.07f;
+    float halfW = watchQuadWidthFocus * focusQuadScale * 0.5f;
+    float halfH = watchQuadHeightFocus * focusQuadScale * 0.5f;
     glm::mat4 projPick = glm::perspective(glm::radians(60.0f), float(pickW) / float(pickH), 0.1f, 100.0f);
     glm::mat4 viewPick = camera.GetViewMatrix();
 
     if (!MouseToWatchQuad3D(mouseX, mouseY, pickW, pickH, projPick, viewPick,
         camera.position, quadCenter, camera.GetRight(), camera.GetUp(),
-        watchQuadWidthFocus * 0.5f, watchQuadHeightFocus * 0.5f, mx, my))
+        halfW, halfH, mx, my))
     {
         mouseClicked = false;
         return;
@@ -220,8 +228,13 @@ static void RenderMainScene(int w, int h,
         handModel->Draw(*handShader);
     }
 
-    float quadW = focusMode ? watchQuadWidthFocus : watchQuadWidthRight;
-    float quadH = focusMode ? watchQuadHeightFocus : watchQuadHeightRight;
+    float quadW, quadH;
+    if (focusMode) {
+        quadW = watchQuadWidthFocus * focusQuadScale;
+        quadH = watchQuadHeightFocus * focusQuadScale;
+    } else {
+        quadW = quadH = watchQuadHeightRight * watchSizeMult;
+    }
     glm::mat3 watchRot(camera.GetRight(), camera.GetUp(), -camera.GetFront());
     glm::mat4 watchModel = glm::translate(glm::mat4(1.0f), watchCenter)
         * glm::mat4(watchRot)
@@ -235,6 +248,8 @@ static void RenderMainScene(int w, int h,
     screenQuadShader->setMat4("uM", watchModel);
     screenQuadShader->setFloat("uAspect", quadW / quadH);
     screenQuadShader->setFloat("uCircleRadius", 0.95f);
+    screenQuadShader->setFloat("uBezelWidth", 0.06f);
+    screenQuadShader->setVec3("uBezelColor", glm::vec3(0.55f, 0.08f, 0.08f));
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, uiTex);
     screenQuadShader->setInt("uTex", 0);
@@ -361,6 +376,12 @@ int main()
 
         glm::mat4 handModelM = ComputeHandModelMatrix(camera, focusMode);
         glm::vec3 watchCenter = GetWatchPositionOnHand(handModelM, focusMode);
+        if (focusMode) {
+            watchCenter -= camera.GetRight() * 0.07f;
+        } else {
+            watchCenter += camera.GetRight() * watchOffsetRight;
+            watchCenter += camera.GetUp() * watchOffsetUp;
+        }
 
         RenderShadowPass(w, h);
         ForceGLState();
