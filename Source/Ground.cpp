@@ -399,6 +399,7 @@ void Ground_Render(Shader& shader,
     if (sideGroundTex != 0 && sideGroundVAO != 0)
     {
         shader.setFloat("uGroundScrollOffset", groundScrollOffset);
+        shader.setFloat("uBrightenGround", 1.0f);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, sideGroundTex);
         glUniform1i(glGetUniformLocation(shaderId, "uTex"), 0);
@@ -415,6 +416,7 @@ void Ground_Render(Shader& shader,
     glBindTexture(GL_TEXTURE_2D, groundTex);
     glUniform1i(glGetUniformLocation(shaderId, "uTex"), 0);
     shader.setFloat("uGroundScrollOffset", groundScrollOffset);
+    shader.setFloat("uBrightenGround", 1.0f);
     glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, groundBaseZ));
     glUniformMatrix4fv(glGetUniformLocation(shaderId, "uM"), 1, GL_FALSE, &model[0][0]);
     glUniformMatrix4fv(glGetUniformLocation(shaderId, "uP"), 1, GL_FALSE, &proj[0][0]);
@@ -424,6 +426,7 @@ void Ground_Render(Shader& shader,
     glDisable(GL_POLYGON_OFFSET_FILL);
 
     shader.setFloat("uGroundScrollOffset", 0.0f);
+    shader.setFloat("uBrightenGround", 0.0f);
     glUniform1f(glGetUniformLocation(shaderId, "uEmissive"), 0.0f);
     glBindVertexArray(buildingQuadVAO);
     int segIndex = 0;

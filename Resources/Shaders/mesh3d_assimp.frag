@@ -8,6 +8,7 @@ in vec3 vNormal;
 
 uniform sampler2D uTex;
 uniform float uGroundScrollOffset;  /* offset UV.y za podlogu (0 = bez efekta) */
+uniform float uBrightenGround;      /* 1=cesta/trotuar (svetlija da se vide sjenke), 0=zgrade */
 uniform float uDebugSolidColor;
 uniform vec3 uSolidColor;  /* kad uDebugSolidColor>0.5: baseColor = uSolidColor */
 
@@ -58,8 +59,7 @@ void main()
     if (uGroundScrollOffset != 0.0)
         uv.y = fract(vUV.y + uGroundScrollOffset);
     vec3 baseColor = texture(uTex, uv).rgb;
-    /* Svetlija podloga da se sjenke vide (tamna tekstura ih skriva) */
-    if (uGroundScrollOffset != 0.0)
+    if (uBrightenGround > 0.5)
         baseColor = baseColor * 1.4 + 0.12;
     if (uDebugSolidColor > 0.5)
         baseColor = uSolidColor;

@@ -2,7 +2,6 @@
 
 extern bool depthTestEnabled;
 extern bool cullFaceEnabled;
-extern bool depthToggleReleased;
-extern bool cullToggleReleased;
+extern bool keyVReleased, keyBReleased, keyCReleased, keyXReleased;
 
 void ForceGLState();

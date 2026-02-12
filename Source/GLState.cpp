@@ -3,8 +3,7 @@
 
 bool depthTestEnabled = true;
 bool cullFaceEnabled = false;
-bool depthToggleReleased = true;
-bool cullToggleReleased = true;
+bool keyVReleased = true, keyBReleased = true, keyCReleased = true, keyXReleased = true;
 
 void ForceGLState()
 {

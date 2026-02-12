@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+ #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
 #include <glm/glm.hpp>
@@ -56,23 +56,27 @@ static void ProcessInput(GLFWwindow* window)
         firstMouse = true;
     }
 
-    if (glfwGetKey(window, GLFW_KEY_V) == GLFW_RELEASE)
-        depthToggleReleased = true;
-    if (glfwGetKey(window, GLFW_KEY_C) == GLFW_RELEASE)
-        cullToggleReleased = true;
+    if (glfwGetKey(window, GLFW_KEY_V) == GLFW_RELEASE) keyVReleased = true;
+    if (glfwGetKey(window, GLFW_KEY_B) == GLFW_RELEASE) keyBReleased = true;
+    if (glfwGetKey(window, GLFW_KEY_C) == GLFW_RELEASE) keyCReleased = true;
+    if (glfwGetKey(window, GLFW_KEY_X) == GLFW_RELEASE) keyXReleased = true;
 
-    if (glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS && depthToggleReleased)
-    {
-        depthToggleReleased = false;
-        depthTestEnabled = !depthTestEnabled;
-    }
-
-    if (depthTestEnabled)
+    if (glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS && keyVReleased) {
+        keyVReleased = false;
+        depthTestEnabled = true;
         cullFaceEnabled = false;
-    else if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS && cullToggleReleased)
-    {
-        cullToggleReleased = false;
-        cullFaceEnabled = !cullFaceEnabled;
+    }
+    if (glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS && keyBReleased) {
+        keyBReleased = false;
+        depthTestEnabled = false;
+    }
+    if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS && keyCReleased && !depthTestEnabled) {
+        keyCReleased = false;
+        cullFaceEnabled = true;
+    }
+    if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS && keyXReleased) {
+        keyXReleased = false;
+        cullFaceEnabled = false;
     }
 }
 
