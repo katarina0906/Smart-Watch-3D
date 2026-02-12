@@ -127,4 +127,5 @@ The application runs with a fixed **75 FPS** frame limiter.
 **Katarina Zgonjanin**  
 Faculty of Technical Sciences  
 University of Novi Sad  
-Computer Graphics — 2025
+Computer Graphics — 2026
+
