@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Resource Files\shaders">
+      <UniqueIdentifier>{b775bc8c-1341-47e0-aefd-748eaf711265}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\textures">
+      <UniqueIdentifier>{d7fc6a5c-5871-4a77-a757-956f7e225c45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\shaders\fonts">
+      <UniqueIdentifier>{8e308fa0-7a77-4322-9c9f-ac083679aa2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\fonts">
+      <UniqueIdentifier>{e64e516d-d74c-4c80-b3ce-68f13e57b829}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\models">
+      <UniqueIdentifier>{9735d1b6-c78e-4c02-975b-a669cf2977ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\models\hands">
+      <UniqueIdentifier>{e298c056-776e-4f14-ba4e-43b669177ccf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneResources.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shadow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Sky.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Util.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BPMScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ScreenManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BatteryScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TimeScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GLState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Ground.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\HandPose.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Header\stb_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\TimeScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\ScreenManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\BPMScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\BatteryScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\GLState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Ground.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\HandPose.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\SceneResources.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Shadow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Sky.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\shader.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\mesh.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\model.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="basic.vert">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="basic.frag">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="text.vert">
+      <Filter>Resource Files\shaders\fonts</Filter>
+    </None>
+    <None Include="text.frag">
+      <Filter>Resource Files\shaders\fonts</Filter>
+    </None>
+    <None Include="Resources\Models\Hands\arm.obj">
+      <Filter>Resource Files\models\hands</Filter>
+    </None>
+    <None Include="Resources\Models\Hands\arm.mtl">
+      <Filter>Resource Files\models\hands</Filter>
+    </None>
+    <None Include="Resources\Models\Hands\rigged_arm.obj">
+      <Filter>Resource Files\models\hands</Filter>
+    </None>
+    <None Include="Resources\Models\Hands\Hand.mtl">
+      <Filter>Resource Files\models\hands</Filter>
+    </None>
+    <None Include="Resources\Models\Hands\rigged_arm.mtl">
+      <Filter>Resource Files\models\hands</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\watch_frame.png">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="..\..\heart.png">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="..\..\heart.jpg">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="..\..\ekg1.png">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="..\..\ekg.png">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="..\..\hello.png">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="..\..\alert_circle.png">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="..\..\nameplate2.png">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="Resources\Models\Hands\defaultMat.png">
+      <Filter>Resource Files\models\hands</Filter>
+    </Image>
+    <Image Include="Resources\Models\Hands\metalnessMap1.png">
+      <Filter>Resource Files\models\hands</Filter>
+    </Image>
+    <Image Include="Resources\Models\Hands\normalMap1.png">
+      <Filter>Resource Files\models\hands</Filter>
+    </Image>
+    <Image Include="Resources\Models\Hands\hand_mapNew.jpg">
+      <Filter>Resource Files\models\hands</Filter>
+    </Image>
+    <Image Include="Resources\Models\Hands\HandFront.png">
+      <Filter>Resource Files\models\hands</Filter>
+    </Image>
+    <Image Include="Resources\Models\Hands\skin.png">
+      <Filter>Resource Files\models\hands</Filter>
+    </Image>
+    <Image Include="Resources\Models\Hands\blinn1_baseColor.jpg">
+      <Filter>Resource Files\models\hands</Filter>
+    </Image>
+    <Image Include="Resources\Models\Hands\blinn1_metallicRoughness.png">
+      <Filter>Resource Files\models\hands</Filter>
+    </Image>
+    <Image Include="Resources\Models\Hands\blinn1_normal.png">
+      <Filter>Resource Files\models\hands</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="..\..\arial.ttf">
+      <Filter>Resource Files\fonts</Filter>
+    </Font>
+  </ItemGroup>
+</Project>
