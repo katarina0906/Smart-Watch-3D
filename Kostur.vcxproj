@@ -131,10 +131,13 @@
     <ClCompile Include="Source\BatteryScreen.cpp" />
     <ClCompile Include="Source\BPMScreen.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
+    <ClCompile Include="Source\GLState.cpp" />
     <ClCompile Include="Source\Ground.cpp" />
+    <ClCompile Include="Source\Render.cpp" />
     <ClCompile Include="Source\HandPose.cpp" />
     <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\model.cpp" />
     <ClCompile Include="Source\Renderer.cpp" />
     <ClCompile Include="Source\SceneResources.cpp" />
     <ClCompile Include="Source\Shadow.cpp" />
@@ -150,7 +153,10 @@
     <ClInclude Include="Header\BatteryScreen.h" />
     <ClInclude Include="Header\BPMScreen.h" />
     <ClInclude Include="Header\Camera.h" />
+    <ClInclude Include="Header\GLState.h" />
     <ClInclude Include="Header\Ground.h" />
+    <ClInclude Include="Header\App.h" />
+    <ClInclude Include="Header\Render.h" />
     <ClInclude Include="Header\HandPose.h" />
     <ClInclude Include="Header\ScreenManager.h" />
     <ClInclude Include="Header\Input.h" />

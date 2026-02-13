@@ -36,6 +36,9 @@
     <ClCompile Include="Source\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Source\SceneResources.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -69,7 +72,13 @@
     <ClCompile Include="Source\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GLState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Ground.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Render.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\HandPose.cpp">
@@ -104,7 +113,16 @@
     <ClInclude Include="Header\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Header\GLState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Header\Ground.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\App.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Render.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Header\HandPose.h">
