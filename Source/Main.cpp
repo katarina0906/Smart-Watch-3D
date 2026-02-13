@@ -60,21 +60,25 @@ static void ProcessInput(GLFWwindow* window)
         firstMouse = true;
     }
 
-    if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
+    if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
+    {
         depthTestEnabled = true;
-        ApplyGLState();
+        glEnable(GL_DEPTH_TEST);
     }
-    if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS) {
+    if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
+    {
         depthTestEnabled = false;
-        ApplyGLState();
+        glDisable(GL_DEPTH_TEST);
     }
-    if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS) {
+    if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
+    {
         cullFaceEnabled = true;
-        ApplyGLState();
+        glEnable(GL_CULL_FACE);
     }
-    if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS) {
+    if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
+    {
         cullFaceEnabled = false;
-        ApplyGLState();
+        glDisable(GL_CULL_FACE);
     }
 }
 
@@ -127,8 +131,9 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    const unsigned int wWidth = 1280, wHeight = 720;
-    GLFWwindow* window = glfwCreateWindow(wWidth, wHeight, "Smart Watch 3D", nullptr, nullptr);
+    GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+    const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+    GLFWwindow* window = glfwCreateWindow(mode->width, mode->height, "Smart Watch 3D", monitor, nullptr);
     glfwMakeContextCurrent(window);
     glewInit();
 
@@ -193,7 +198,6 @@ int main()
         last = now;
 
         ProcessInput(window);
-        ApplyGLState();
 
         int pickW, pickH;
         glfwGetFramebufferSize(window, &pickW, &pickH);
@@ -212,7 +216,6 @@ int main()
         BatteryScreen_Update(dt);
 
         RenderUIScreen();
-        ApplyGLState();
 
         int w = pickW, h = pickH;
         glViewport(0, 0, w, h);
@@ -222,7 +225,6 @@ int main()
         glm::mat4 view = camera.GetViewMatrix();
 
         Sky_Render(skyShader, skyTex, proj, view, camera.position);
-        ApplyGLState();
 
         glm::mat4 handModelM = ComputeHandModelMatrix(camera, focusMode);
         glm::vec3 watchCenter = GetWatchPositionOnHand(handModelM, focusMode);

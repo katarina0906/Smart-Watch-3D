@@ -2,8 +2,8 @@
 #include <glm/glm.hpp>
 
 #include "../Header/App.h"
-#include "../Header/Camera.h"
 #include "../Header/GLState.h"
+#include "../Header/Camera.h"
 #include "../Header/Ground.h"
 #include "../Header/HandPose.h"
 #include "../Header/Renderer.h"
