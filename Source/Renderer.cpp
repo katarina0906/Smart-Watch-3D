@@ -140,7 +140,6 @@ void drawTexturedQuad(
     float sx, float sy,
     unsigned int tex)
 {
-    glDisable(GL_CULL_FACE);
     glUseProgram(shader);
 
     glUniform2f(glGetUniformLocation(shader, "uPos"), x, y);
@@ -163,7 +162,6 @@ void drawQuadRect(
     float sx, float sy,
     float r, float g, float b, float a)
 {
-    glDisable(GL_CULL_FACE);
     glUseProgram(shader);
 
     glUniform2f(glGetUniformLocation(shader, "uPos"), x, y);
@@ -184,7 +182,6 @@ void Renderer_DrawText(
     float scale,
     float r, float g, float b)
 {
-    glDisable(GL_CULL_FACE);
     glUseProgram(textShader);
 
     glUniform3f(glGetUniformLocation(textShader, "textColor"), r, g, b);
@@ -243,7 +240,6 @@ void Renderer_DrawTextScreen(
     int screenW, int screenH)
 {
     if (screenW <= 0 || screenH <= 0) return;
-    glDisable(GL_CULL_FACE);
     glm::mat4 proj = glm::ortho(0.0f, (float)screenW, 0.0f, (float)screenH);
 
     glUseProgram(textShader);

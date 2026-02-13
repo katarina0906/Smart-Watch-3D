@@ -16,7 +16,6 @@
 #include "../Header/Input.h"
 #include "../Header/model.hpp"
 #include "../Header/shader.hpp"
-#include "../Header/GLState.h"
 #include "../Header/Shadow.h"
 #include "../Header/Sky.h"
 #include "../Header/HandPose.h"
@@ -34,11 +33,39 @@ Model* handModel = nullptr;
 
 bool focusMode = false;
 bool spaceReleased = true;
+bool depthTestEnabled = true;
+bool cullFaceEnabled = false;
 
 float watchOffsetRight = -0.21f;
 float watchOffsetUp = -0.01f;
 float watchSizeMult = 0.91f;
 const float focusQuadScale = 0.78f;
+
+static void ApplyGLState()
+{
+    if (depthTestEnabled)
+        glEnable(GL_DEPTH_TEST);
+    else
+        glDisable(GL_DEPTH_TEST);
+    if (cullFaceEnabled) {
+        glEnable(GL_CULL_FACE);
+        glCullFace(GL_BACK);
+    } else {
+        glDisable(GL_CULL_FACE);
+    }
+}
+
+static void ApplyGLStateUI()
+{
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_CULL_FACE);
+}
+
+static void ApplyGLStateShadow()
+{
+    glEnable(GL_DEPTH_TEST);
+    glDisable(GL_CULL_FACE);
+}
 
 static void ProcessInput(GLFWwindow* window)
 {
@@ -121,8 +148,7 @@ static void RenderUIScreen()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(0.02f, 0.02f, 0.04f, 1.0f);
 
-    glDisable(GL_DEPTH_TEST);
-    glDisable(GL_CULL_FACE);
+    ApplyGLStateUI();
     if (currentScreen == SCREEN_TIME) TimeScreen_Render(uiShader, quadVAO);
     else if (currentScreen == SCREEN_BPM) BPMScreen_Render(uiShader, quadVAO);
     else BatteryScreen_Render(uiShader, quadVAO);
@@ -138,15 +164,13 @@ static void RenderShadowPass(int w, int h)
     glViewport(0, 0, (GLsizei)SHADOW_WIDTH, (GLsizei)SHADOW_HEIGHT);
     glBindFramebuffer(GL_FRAMEBUFFER, shadowMapFBO);
     glClear(GL_DEPTH_BUFFER_BIT);
-    ForceGLState();
-    glDisable(GL_CULL_FACE);
+    ApplyGLStateShadow();
 
     if (shadowShader != nullptr)
     {
         Ground_RenderShadow(*shadowShader, lightSpaceS, camera.position);
         if (handModel != nullptr)
         {
-            glDisable(GL_CULL_FACE);
             shadowShader->use();
             shadowShader->setMat4("uLightSpace", lightSpaceS);
             shadowShader->setMat4("uM", handModelM);
@@ -187,14 +211,14 @@ static void RenderMainScene(int w, int h,
     meshShader->setFloat("uDebugSolidColor", 0.0f);
     meshShader->setVec3("uSolidColor", glm::vec3(1.0f, 0.1f, 0.1f));
 
-    ForceGLState();
+    ApplyGLState();
     Ground_Render(*meshShader, proj, view, camera.position);
 
     if (handModel != nullptr && handShader != nullptr)
     {
-        ForceGLState();
-        glDepthFunc(GL_LESS);
-        glDisable(GL_BLEND);
+    ApplyGLState();
+    glDepthFunc(GL_LESS);
+    glDisable(GL_BLEND);
 
         handShader->use();
         handShader->setMat4("uP", proj);
@@ -225,7 +249,7 @@ static void RenderMainScene(int w, int h,
         * glm::mat4(watchRot)
         * glm::scale(glm::mat4(1.0f), glm::vec3(quadW, quadH, 1.0f));
 
-    ForceGLState();
+    ApplyGLState();
     glDepthFunc(GL_ALWAYS);
     screenQuadShader->use();
     screenQuadShader->setMat4("uP", proj);
@@ -243,7 +267,7 @@ static void RenderMainScene(int w, int h,
 
     glBindVertexArray(0);
     glDepthFunc(GL_LESS);
-    glDisable(GL_DEPTH_TEST);
+    ApplyGLStateUI();
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     if (tex_nameplate)
@@ -270,8 +294,7 @@ int main()
     glfwSetMouseButtonCallback(window, mouseButtonCallback);
     glfwSetCursorPosCallback(window, cursorPositionCallback);
 
-    ForceGLState();
-
+    ApplyGLState();
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glClearColor(0.12f, 0.12f, 0.18f, 1.0f);
@@ -327,7 +350,7 @@ int main()
         last = now;
 
         ProcessInput(window);
-        ForceGLState();
+        ApplyGLState();
 
         int pickW, pickH;
         glfwGetFramebufferSize(window, &pickW, &pickH);
@@ -346,7 +369,7 @@ int main()
         BatteryScreen_Update(dt);
 
         RenderUIScreen();
-        ForceGLState();
+        ApplyGLState();
 
         int w = pickW, h = pickH;
         glViewport(0, 0, w, h);
@@ -356,7 +379,7 @@ int main()
         glm::mat4 view = camera.GetViewMatrix();
 
         Sky_Render(skyShader, skyTex, proj, view, camera.position);
-        ForceGLState();
+        ApplyGLState();
 
         glm::mat4 handModelM = ComputeHandModelMatrix(camera, focusMode);
         glm::vec3 watchCenter = GetWatchPositionOnHand(handModelM, focusMode);
@@ -368,7 +391,7 @@ int main()
         }
 
         RenderShadowPass(w, h);
-        ForceGLState();
+        ApplyGLState();
 
         RenderMainScene(w, h, proj, view, handModelM, watchCenter);
 

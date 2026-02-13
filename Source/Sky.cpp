@@ -87,7 +87,6 @@ void Sky_Render(Shader* shader, unsigned int skyTexture,
     if (shader == nullptr || skyTexture == 0 || skyVAO == 0)
         return;
 
-    glDisable(GL_CULL_FACE);
     shader->use();
     glm::mat4 skyModel = glm::translate(glm::mat4(1.0f), cameraPos);
     skyModel = glm::scale(skyModel, glm::vec3(80.0f));
