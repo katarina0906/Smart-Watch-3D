@@ -61,28 +61,14 @@ static void ProcessInput(GLFWwindow* window)
         firstMouse = true;
     }
 
-    if (glfwGetKey(window, GLFW_KEY_V) == GLFW_RELEASE) keyVReleased = true;
-    if (glfwGetKey(window, GLFW_KEY_B) == GLFW_RELEASE) keyBReleased = true;
-    if (glfwGetKey(window, GLFW_KEY_C) == GLFW_RELEASE) keyCReleased = true;
-    if (glfwGetKey(window, GLFW_KEY_X) == GLFW_RELEASE) keyXReleased = true;
-
-    if (glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS && keyVReleased) {
-        keyVReleased = false;
+    if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
         depthTestEnabled = true;
-        cullFaceEnabled = false;
-    }
-    if (glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS && keyBReleased) {
-        keyBReleased = false;
+    if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
         depthTestEnabled = false;
-    }
-    if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS && keyCReleased && !depthTestEnabled) {
-        keyCReleased = false;
+    if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
         cullFaceEnabled = true;
-    }
-    if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS && keyXReleased) {
-        keyXReleased = false;
+    if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
         cullFaceEnabled = false;
-    }
 }
 
 static void ProcessWatchPicking(int pickW, int pickH)
@@ -152,9 +138,8 @@ static void RenderShadowPass(int w, int h)
     glViewport(0, 0, (GLsizei)SHADOW_WIDTH, (GLsizei)SHADOW_HEIGHT);
     glBindFramebuffer(GL_FRAMEBUFFER, shadowMapFBO);
     glClear(GL_DEPTH_BUFFER_BIT);
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
-    glCullFace(GL_BACK);
+    ForceGLState();
+    glDisable(GL_CULL_FACE);
 
     if (shadowShader != nullptr)
     {
@@ -272,9 +257,8 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    GLFWmonitor* monitor = glfwGetPrimaryMonitor();
-    const GLFWvidmode* mode = glfwGetVideoMode(monitor);
-    GLFWwindow* window = glfwCreateWindow(mode->width, mode->height, "Smart Watch 3D", monitor, nullptr);
+    const unsigned int wWidth = 1280, wHeight = 720;
+    GLFWwindow* window = glfwCreateWindow(wWidth, wHeight, "Smart Watch 3D", nullptr, nullptr);
     glfwMakeContextCurrent(window);
     glewInit();
 

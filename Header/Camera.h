@@ -27,7 +27,6 @@ private:
     CameraMode mode;
 };
 
-// External variables for mouse control
 extern double lastMouseY;
 extern bool firstMouse;
 extern float mouseSensitivity;

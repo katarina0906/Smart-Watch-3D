@@ -28,7 +28,6 @@ void Renderer_DrawText(
     float r, float g, float b
 );
 
-/* Ista funkcija ali s ortografskom projekcijom za ekran (x,y u pikselima, y=0 dolje) */
 void Renderer_DrawTextScreen(
     const char* text,
     float x, float y,

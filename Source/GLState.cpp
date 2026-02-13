@@ -3,7 +3,6 @@
 
 bool depthTestEnabled = true;
 bool cullFaceEnabled = false;
-bool keyVReleased = true, keyBReleased = true, keyCReleased = true, keyXReleased = true;
 
 void ForceGLState()
 {
@@ -12,10 +11,10 @@ void ForceGLState()
     else
         glDisable(GL_DEPTH_TEST);
 
-    glDisable(GL_CULL_FACE);
-    if (cullFaceEnabled && !depthTestEnabled)
-    {
+    if (cullFaceEnabled) {
         glEnable(GL_CULL_FACE);
         glCullFace(GL_BACK);
+    } else {
+        glDisable(GL_CULL_FACE);
     }
 }
